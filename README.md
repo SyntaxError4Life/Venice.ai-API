@@ -1,5 +1,3 @@
-Here is the translation of the provided text in English:
-
 ### Documentation for Venice AI APIs
 
 ---
