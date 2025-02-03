@@ -80,7 +80,6 @@ To perform inference in streaming mode, you can activate the `stream=True` param
 
 ```python
 from openai import OpenAI
-
 client = OpenAI(
     api_key="api_key",
     base_url="https://api.venice.ai/api/v1"
@@ -88,9 +87,7 @@ client = OpenAI(
 
 stream = client.chat.completions.create(
     model="default",
-    messages=[
-        {"role": "user", "content": "Hello, how are you?"}
-    ],
+    messages=[{"role": "user", "content": "Hello, how are you?"}],
     temperature=0.7,
     frequency_penalty=0.2,
     presence_penalty=0.2,
@@ -105,7 +102,8 @@ stream = client.chat.completions.create(
 
 for chunk in stream:
     if chunk.choices and chunk.choices[0].delta.content:
-        print(chunk.choices[0].delta.content, end='', flush=True)
+        text = chunk.choices[0].delta.content
+        print(text, end='', flush=True)
 ```
 
 ---
