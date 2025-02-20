@@ -36,9 +36,10 @@ llama-3.3-70b
 llama-3.2-3b
 dolphin-2.9.2-qwen2-72b
 llama-3.1-405b
-qwen32b
+qwen2.5-coder-32b
 deepseek-r1-llama-70b
 deepseek-r1-671b
+qwen-2.5-vl
 ```
 
 ---
