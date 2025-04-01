@@ -26,20 +26,16 @@ for model in models.data:
 Expected output:
 
 ```
-fluently-xl
-flux-dev
-flux-dev-uncensored
-pony-realism
-stable-diffusion-3.5
-lustify-sdxl
 llama-3.3-70b
 llama-3.2-3b
+mistral-31-24b
+qwen-2.5-qwq-32b
+qwen-2.5-vl
 dolphin-2.9.2-qwen2-72b
 llama-3.1-405b
-qwen2.5-coder-32b
-deepseek-r1-llama-70b
 deepseek-r1-671b
-qwen-2.5-vl
+qwen-2.5-coder-32b
+deepseek-coder-v2-lite
 ```
 
 ---
