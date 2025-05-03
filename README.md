@@ -199,3 +199,4 @@ with open("generated_image.png", "wb") as f:
 
 print("Image generated successfully!")
 ```
+
