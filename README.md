@@ -200,3 +200,11 @@ with open("generated_image.png", "wb") as f:
 print("Image generated successfully!")
 ```
 
+### 6. Gradio space (for HuggingFace or not)
+
+In the `/VeniceGradio.py` file, you'll find simple code to deploy an application that uses all the text models available on Venice.ai.
+
+You'll just need an API key, as with everything else. 
+Please note: the code is intended for personal use only (no concurrent conversations) and no permanent storage.
+
+I personally use this to talk to an AI about topics without needing to keep the conversation.
