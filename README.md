@@ -26,12 +26,18 @@ for model in models.data:
 Expected output:
 
 ```
-llama-3.2-3b
-llama-4-maverick-17b
-mistral-31-24b
 venice-uncensored
-qwen-2.5-coder-32b
 qwen-2.5-qwq-32b
+qwen3-4b
+mistral-31-24b
+qwen3-235b
+llama-3.2-3b
+llama-3.3-70b
+llama-3.1-405b
+dolphin-2.9.2-qwen2-72b
+qwen-2.5-vl
+qwen-2.5-coder-32b
+deepseek-r1-671b
 deepseek-coder-v2-lite
 ```
 
