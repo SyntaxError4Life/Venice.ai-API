@@ -3,7 +3,7 @@
 - [1. Getting the List of Available Models](#1-getting-the-list-of-available-models)
 - [2. Inferring via API in Normal Mode](#2-inferring-via-api-in-normal-mode)
 - [3. Inferring via API in Streaming Mode](#3-inferring-via-api-in-streaming-mode)
-- [4. Using Venice AI's Utilities and Arguments](#4-using-venice-ais-utilities-and-arguments)
+- [4. Using Venice AI's tools call](#4-using-venice-ais-tools-call)
 - [5. Generating images](#5-generating-images)
 - [6. Gradio space](#6-gradio-space-for-huggingface-or-not)
 - [7. Configuration in brave leo](#7-configuration-in-brave-leo)
@@ -118,9 +118,9 @@ for chunk in stream:
 
 ---
 
-### 4. Using Venice AI's Utilities and Arguments
+### 4. Using Venice AI's tools call
 
-Utilities allow you to add additional features to your inference requests, such as database queries or external script execution. You can use the `chat.completions.create` method to send requests containing utilities.
+Tools call allow you to add additional features to your inference requests, such as database queries or external script execution. You can use the `chat.completions.create` method to send requests containing utilities.
 
 ```python
 from openai import OpenAI
