@@ -210,7 +210,7 @@ print("Image generated successfully!")
 
 ### 6. Gradio space (for HuggingFace or not)
 
-In the `/VeniceGradio.py` file, you'll find simple code to deploy an application that uses all the text models available on Venice.ai.
+In the [/VeniceGradio.py](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceGradio.py) file, you'll find simple code to deploy an application that uses all the text models available on Venice.ai.
 
 You'll just need an API key, as with everything else. 
 Please note: the code is intended for personal use only (no concurrent conversations) and no permanent storage.
