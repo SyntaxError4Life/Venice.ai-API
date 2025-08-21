@@ -1,5 +1,13 @@
 ### Documentation for Venice AI APIs
 
+- [1. Getting the List of Available Models](#1-getting-the-list-of-available-models)
+- [2. Inferring via API in Normal Mode](#2-inferring-via-api-in-normal-mode)
+- [3. Inferring via API in Streaming Mode](#3-inferring-via-api-in-streaming-mode)
+- [4. Using Venice AI's Utilities and Arguments](#4-using-venice-ais-utilities-and-arguments)
+- [5. Generating images](#5-generating-images)
+- [6. Gradio space](#6-gradio-space-for-huggingface-or-not)
+- [7. Configuration in brave leo](#7-configuration-in-brave-leo)
+
 ---
 
 ### 1. Getting the List of Available Models
@@ -162,7 +170,7 @@ else:
 
 ---
 
-### 5. Generating Images
+### 5. Generating images
 
 To generate images via the Venice AI API, you can use the `/image/generate` endpoint directly. Here's an example of code to generate an image and save it locally.
 
