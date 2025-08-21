@@ -216,3 +216,18 @@ You'll just need an API key, as with everything else.
 Please note: the code is intended for personal use only (no concurrent conversations) and no permanent storage.
 
 I personally use this to talk to an AI about topics without needing to keep the conversation.
+
+---
+
+### 7. Configuration in [brave leo](brave://settings/leo-ai)
+
+Exemple for a model :
+- Name : `Qwen3 235b`
+- Request name : `qwen3-235b`
+- Endpoint : `https://api.venice.ai/api/v1/chat/completions`
+- Context : `32000`
+- APK_KEY : [here](https://venice.ai/settings/api)
+- System prompt : **what u want**
+- Image : `no`
+
+
