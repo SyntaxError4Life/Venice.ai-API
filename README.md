@@ -8,6 +8,20 @@
 - [6. Gradio space](#6-gradio-space-for-huggingface-or-not)
 - [7. Configuration in brave leo](#7-configuration-in-brave-leo)
 
+Venice.Ai API Specifics :
+- Supports streaming with `tool_calls` in delta chunks  
+- `tool_call` data arrives progressively: requires manual aggregation of `index`, `id`, `name`, and `arguments`  
+- `finish_reason="tool_calls"` appears in a separate chunk after deltas  
+- Empty or metadata-only chunks must be handled (choices may be empty or delta None)  
+- `extra_body` required for model-specific parameters (e.g. `venice_parameters`)  
+- Function calling works in streaming mode without blocking  
+- Role tags (e.g. `<tool_call>`, `</tool_call>`) may be included in content and must be ignored or stripped  
+- Consistent tool call structure only after full aggregation, not available in first chunk
+
+Additional files :
+- [Standard chat loop w/ streaming tokens](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceChat.py)
+- [Outils d'appel en streaming intégral](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceTools.py)
+
 ---
 
 ### 1. Getting the List of Available Models
