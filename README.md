@@ -9,14 +9,10 @@
 - [7. Configuration in brave leo](#7-configuration-in-brave-leo)
 
 Venice.Ai API Specifics :
-- Supports streaming with `tool_calls` in delta chunks  
-- `tool_call` data arrives progressively: requires manual aggregation of `index`, `id`, `name`, and `arguments`  
-- `finish_reason="tool_calls"` appears in a separate chunk after deltas  
-- Empty or metadata-only chunks must be handled (choices may be empty or delta None)  
-- `extra_body` required for model-specific parameters (e.g. `venice_parameters`)  
-- Function calling works in streaming mode without blocking  
-- Role tags (e.g. `<tool_call>`, `</tool_call>`) may be included in content and must be ignored or stripped  
-- Consistent tool call structure only after full aggregation, not available in first chunk
+- `tool_calls` in streaming: arrives incrementally — requires manual aggregation of `index`, `id`, `name`, and `arguments`
+- `finish_reason="tool_calls"` comes in a **separate chunk** after the deltas (not in the same chunk)
+- Streaming chunks may be **empty or metadata-only** — always check `choices` and `delta` before access
+- `extra_body` required for model control (e.g. `"venice_parameters": {"include_venice_system_prompt": False}`)
 
 Additional files :
 - [Standard chat loop w/ streaming tokens](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceChat.py)
@@ -230,11 +226,12 @@ print("Image generated successfully!")
 
 ---
 
-### 6. Gradio space (for HuggingFace or not)
+### 6. Gradio interface
 
 In the [/VeniceGradio.py](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceGradio.py) file, you'll find simple code to deploy an application that uses all the text models available on Venice.ai.
 
-You'll just need an API key, as with everything else. 
+You'll just need an API key, as with everything else.
+
 Please note: the code is intended for personal use only (no concurrent conversations) and no permanent storage.
 
 I personally use this to talk to an AI about topics without needing to keep the conversation.
