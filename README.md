@@ -16,7 +16,7 @@ Venice.Ai API Specifics :
 
 Additional files :
 - [Standard chat loop w/ streaming tokens](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceChat.py)
-- [Outils d'appel en streaming intégral](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceTools.py)
+- [Full Streaming Call Tools](https://github.com/SyntaxError4Life/Venice.ai-API/blob/main/VeniceTools.py)
 
 ---
 
