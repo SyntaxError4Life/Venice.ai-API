@@ -10,7 +10,7 @@
 
 Venice.Ai API Specifics :
 - `tool_calls` in streaming: arrives incrementally — requires manual aggregation of `index`, `id`, `name`, and `arguments`
-- `finish_reason="tool_calls"` comes in a **separate chunk** after the deltas (not in the same chunk)
+- `finish_reason="tool_calls"` comes in a **separate chunk** after the deltas (not in the same chunk) and only for less than two tool call
 - Streaming chunks may be **empty or metadata-only** — always check `choices` and `delta` before access
 - `extra_body` required for model control (e.g. `"venice_parameters": {"include_venice_system_prompt": False}`)
 
