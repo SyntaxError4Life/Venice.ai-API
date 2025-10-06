@@ -46,6 +46,7 @@ def run_conversation(prompt):
     Runs a full conversation with streaming, tool call handling, and complete logging.
     Uses qwen3-235b for streaming reasoning and function calling.
     Handles edge cases in streaming chunks (empty choices, None content, etc.).
+    Accumulates tool call arguments as list of chunks, joins at end for parsing.
     """
     # Build messages
     messages = [
@@ -60,7 +61,7 @@ def run_conversation(prompt):
     
     # Streaming response with tool support
     stream = client.chat.completions.create(
-        model="qwen3-235b",
+        model=model,
         messages=messages,
         tools=tools,
         tool_choice="auto",
@@ -75,6 +76,7 @@ def run_conversation(prompt):
     accumulated_tool_calls = {}
     tool_calls = []
     in_tool_call = False
+    arg_chunks = {}  # Per tool_call index: list of argument chunks
 
     # Process each chunk
     for chunk in stream:
@@ -104,17 +106,44 @@ def run_conversation(prompt):
                     accumulated_tool_calls[index] = {
                         "id": tool_call.id,
                         "function": {"name": "", "arguments": ""},
-                        "type": tool_call.type
+                        "type": tool_call.type,
+                        "arg_chunks": []  # New: list for arguments
                     }
                 if tool_call.function:
                     if tool_call.function.name:
                         accumulated_tool_calls[index]["function"]["name"] += tool_call.function.name
                     if tool_call.function.arguments:
-                        accumulated_tool_calls[index]["function"]["arguments"] += tool_call.function.arguments
+                        # Append to list instead of +=
+                        accumulated_tool_calls[index]["arg_chunks"].append(tool_call.function.arguments)
 
         # On finish reason: finalize tool calls
         if chunk.choices[0].finish_reason == "tool_calls":
             # Convert accumulated tool calls
+            for idx, call in accumulated_tool_calls.items():
+                # Join arg chunks
+                joined_args = ''.join(call["arg_chunks"])
+                # Clean up common malformations (e.g., leading/trailing {} or duplicates)
+                # Simple fix: find the last complete JSON object
+                if joined_args:
+                    # Try to parse the full joined string
+                    try:
+                        parsed_args = json.loads(joined_args)
+                        call["function"]["arguments"] = json.dumps(parsed_args)
+                    except json.JSONDecodeError:
+                        # Fallback: attempt to extract valid JSON substring
+                        # Look for balanced braces starting from end
+                        start = joined_args.rfind('{')
+                        if start != -1:
+                            potential_json = joined_args[start:]
+                            try:
+                                parsed_args = json.loads(potential_json)
+                                call["function"]["arguments"] = json.dumps(parsed_args)
+                            except json.JSONDecodeError:
+                                # Last resort: use raw joined as string
+                                call["function"]["arguments"] = joined_args
+                        else:
+                            call["function"]["arguments"] = joined_args
+            
             tool_calls = [
                 {
                     "id": call["id"],
@@ -155,11 +184,18 @@ def run_conversation(prompt):
                         print(f"[TOOL RESPONSE: {result}]")
                     except Exception as e:
                         print(f"[TOOL ERROR: {e}]")
+                        # Append error as tool response to avoid breaking the chain
+                        messages.append({
+                            "role": "tool",
+                            "content": f"Error: {e}",
+                            "tool_call_id": tc["id"],
+                            "name": tc["function"]["name"]
+                        })
 
             # Now generate final response after tool execution
             print("\n\nAssistant (final response): ", end='', flush=True)
             final_stream = client.chat.completions.create(
-                model="qwen3-235b",
+                model=model,
                 messages=messages,
                 stream=True,
                 temperature=0.6,
