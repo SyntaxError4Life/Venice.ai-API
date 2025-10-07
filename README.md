@@ -1,3 +1,7 @@
+### Extra
+
+* Go to [open-taranis](https://github.com/SyntaxError4Life/open-taranis) to see more and future uses of the Venice.ai API
+
 ### Documentation for Venice AI APIs
 
 - [1. Getting the List of Available Models](#1-getting-the-list-of-available-models)
